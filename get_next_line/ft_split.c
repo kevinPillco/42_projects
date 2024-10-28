@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-static int	count_words(char const *s, char c)
+int	count_words(char const *s, char c)
 {
 	int	count;
 	int	in_word;
@@ -21,7 +21,7 @@ static int	count_words(char const *s, char c)
 	return (count);
 }
 
-static char	*get_next_word(char const **s, char c)
+char	*get_next_word(char const **s, char c)
 {
 	const char	*start;
 	char		*word;
