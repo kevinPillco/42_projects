@@ -7,7 +7,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#define BUFFER_SIZE 1024
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1024
+#endif
 
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_realloc(void *ptr, size_t old_size, size_t new_size);
