@@ -10,6 +10,7 @@ int main()
 	}
 
 	char *line;
+
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		printf("%s\n", line);
@@ -17,5 +18,5 @@ int main()
 	}
 	close(fd);
 
-	return 0;
+	return (0);
 }

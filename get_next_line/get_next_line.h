@@ -7,15 +7,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#define BUFFER_SIZE 1024  // Define el tamaño del buffer
+#define BUFFER_SIZE 1024
 
-// Funciones para manejar la memoria
-void *ft_memcpy(void *dest, const void *src, size_t n);
-void *ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
+void		*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+char		*get_text(int fd);
+char		**ft_split(char const *s, char c);
+char		*get_next_line(int fd);
+static int	count_words(char const *s, char c);
+static char	*get_next_word(char const **s, char c);
 
-// Funciones para leer el archivo y dividir en líneas
-char *get_text(int fd);
-char **ft_split(char const *s, char c);
-char *get_next_line(int fd);
-
-#endif // GET_NEXT_LINE_H
+#endif

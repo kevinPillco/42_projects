@@ -2,45 +2,43 @@
 
 char *get_text(int fd) 
 {
-	char *my_txt = malloc(BUFFER_SIZE);  // Asignar memoria inicial para BUFFER_SIZE
-	if (my_txt == NULL) 
-	{
-		return NULL;  // Fallo en malloc
-	}
-
-	int total_bytes = 0;
+	char *my_txt;
+	char *temp_txt;
+	int total_bytes;
 	int bytes_leidos;
 
-	// Leer y almacenar el contenido del archivo
+	my_txt = malloc(BUFFER_SIZE);
+	if (my_txt == NULL) 
+		return (NULL);
+	total_bytes = 0;
 	while ((bytes_leidos = read(fd, my_txt + total_bytes, BUFFER_SIZE)) > 0) 
 	{
-		total_bytes += bytes_leidos;  // Acumular los bytes leídos
-		char *temp_txt = realloc(my_txt, total_bytes + BUFFER_SIZE + 1); // Reasignar memoria para más contenido
+		total_bytes += bytes_leidos;
+		temp_txt = realloc(my_txt, total_bytes + BUFFER_SIZE + 1);
 		if (temp_txt == NULL) 
 		{
 			free(my_txt);
-			return NULL;  // Fallo en realloc
+			return (NULL);
 		}
 		my_txt = temp_txt;
 	}
-
 	if (bytes_leidos == -1) 
 	{
-		free(my_txt);  // Si hubo un error de lectura, liberar la memoria
-		return NULL;
+		free(my_txt);
+		return (NULL);
 	}
-
-	my_txt[total_bytes] = '\0';  // Null-terminar la cadena
-	return my_txt;  // Retornar el contenido completo del archivo
+	my_txt[total_bytes] = '\0';
+	return (my_txt);
 }
 
-char *get_next_line(int fd) 
+char	*get_next_line(int fd)
 {
 	static char	**lines;
 	static int	current_line;
 	char		*line;
 	char		*my_txt;
 
+	lines == NULL;
 	if (lines == NULL)
 	{
 		my_txt = get_text(fd);
@@ -53,14 +51,10 @@ char *get_next_line(int fd)
 	}
 	line = lines[current_line];
 	if (line == NULL)
-	{ // Si ya no hay más líneas
+	{
 		free(lines);
-		lines = NULL;
-		current_line = 0;
 		return NULL;
 	}
-
-	current_line++; // Avanzar a la siguiente línea
-	return line;
+	current_line++;
+	return (line);
 }
-
