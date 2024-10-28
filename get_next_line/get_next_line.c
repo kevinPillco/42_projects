@@ -1,28 +1,30 @@
 #include "get_next_line.h"
 
-char *get_text(int fd) 
+char	*get_text(int fd)
 {
-	char *my_txt;
-	char *temp_txt;
-	int total_bytes;
-	int bytes_leidos;
+	char	*my_txt;
+	char	*temp_txt;
+	int		total_bytes;
+	int		bytes_leidos;
 
 	my_txt = malloc(BUFFER_SIZE);
-	if (my_txt == NULL) 
+	if (my_txt == NULL)
 		return (NULL);
 	total_bytes = 0;
-	while ((bytes_leidos = read(fd, my_txt + total_bytes, BUFFER_SIZE)) > 0) 
+	bytes_leidos = read(fd, my_txt + total_bytes, BUFFER_SIZE);
+	while (bytes_leidos > 0)
 	{
 		total_bytes += bytes_leidos;
 		temp_txt = realloc(my_txt, total_bytes + BUFFER_SIZE + 1);
-		if (temp_txt == NULL) 
+		if (temp_txt == NULL)
 		{
 			free(my_txt);
 			return (NULL);
 		}
 		my_txt = temp_txt;
+		bytes_leidos = read(fd, my_txt + total_bytes, BUFFER_SIZE);
 	}
-	if (bytes_leidos == -1) 
+	if (bytes_leidos == -1)
 	{
 		free(my_txt);
 		return (NULL);
@@ -52,7 +54,7 @@ char	*get_next_line(int fd)
 	if (line == NULL)
 	{
 		free(lines);
-		return NULL;
+		return (NULL);
 	}
 	current_line++;
 	return (line);
