@@ -38,7 +38,6 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*my_txt;
 
-	lines == NULL;
 	if (lines == NULL)
 	{
 		my_txt = get_text(fd);
