@@ -14,3 +14,6 @@
 14 - 
 15 - elit, ultricies at pulvinar sit amet, pretium eu dolor. Etiam nisl lacus, feugiat non convallis a, sodales non ante. Sed hendrerit imper
 16 - diet neque. Nullam tempus mollis est condimentum bibendum. Quisque non sapien justo.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+gcc .\ft_split.c .\get_next_line.c .\get_next_line_utils.c .\main.c
+-------------------------------------------------------------------------------------------------------------------------------------------------
