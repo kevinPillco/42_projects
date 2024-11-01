@@ -1,5 +1,5 @@
 # Nombre del ejecutable
-NAME = get_next_line
+NAME = get_next_line.a
 
 # Compilador
 CC = gcc
