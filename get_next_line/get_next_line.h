@@ -12,7 +12,7 @@
 #endif
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void	*ft_realloc(void *ptr, size_t new_size);
 char	*get_text(int fd);
 char	**ft_split(char const *s, char c);
 char	*get_next_line(int fd);
