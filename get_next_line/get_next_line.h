@@ -1,22 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kpillco- <kpillco-@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/02 12:53:00 by gemartin          #+#    #+#             */
+/*   Updated: 2024/11/09 19:47:50 by kpillco-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <string.h>
+# include<unistd.h>
+# include<stdio.h>
+# include<stdlib.h>
+# include<fcntl.h>
+# include<limits.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1024
-#endif
-
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*ft_realloc(void *ptr, size_t new_size);
-char	*get_text(int fd);
-char	**ft_split(char const *s, char c);
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
+size_t	ft_strlen(char *s);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(char *s1);
+char	*ft_strchr(char *s, int c);
+char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
-int		count_words(char const *s, char c);
-char	*get_next_word(char const **s, char c);
-
+char	*ft_free(char **str);
 #endif

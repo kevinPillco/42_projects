@@ -1,117 +1,95 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kpillco- <kpillco-@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/09 19:46:16 by kpillco-          #+#    #+#             */
+/*   Updated: 2024/11/09 19:46:45 by kpillco-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char		*d;
-	const char	*s;
+	char	*str;
+	size_t	i;
+	size_t	c;
 
-	if (!dest || !src)
-		return (NULL);
-	d = (char *)dest;
-	s = (const char *)src;
-	while (n--)
-		*d++ = *s++;
-	return (dest);
-}
-
-void *ft_realloc(void *ptr, size_t new_size) {
-	// Si el nuevo tamaño es 0, liberamos la memoria y devolvemos NULL
-	if (new_size == 0) {
-		free(ptr);
-		return (NULL);
-	}
-	
-	// Si el puntero es NULL, simplemente asignamos un nuevo bloque de memoria
-	if (ptr == NULL) {
-		return (malloc(new_size));
-	}
-
-	// Intentamos asignar un nuevo bloque de memoria
-	void *new_ptr = malloc(new_size);
-	if (!new_ptr) {
-		return (NULL);
-	}
-
-	memcpy(new_ptr, ptr, new_size);
-
-	free(ptr);
-
-	return (new_ptr);
-}
-
-int	count_words(char const *s, char c)
-{
-	int	count;
-	int	in_word;
-
-	count = 0;
-	in_word = 0;
-	while (*s)
+	if (!s1)
 	{
-		if (*s != c && in_word == 0)
-		{
-			in_word = 1;
-			count++;
-		}
-		else if (*s == c)
-			in_word = 0;
-		s++;
+		s1 = malloc(sizeof(char) + 1);
+		if (!s1)
+			return (0);
+		s1[0] = 0;
 	}
-	return (count);
+	str = (char *)malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
+		return (ft_free(&s1));
+	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
+	c = -1;
+	while (s2[++c])
+		str[i + c] = s2[c];
+	str[i + c] = '\0';
+	free(s1);
+	return (str);
 }
 
-char	*get_next_word(char const **s, char c)
+size_t	ft_strlen(char *s)
 {
-	const char	*start;
-	char		*word;
-	int			i;
-	int			index;
+	size_t	i;
 
-	while (**s && **s == c)
-		(*s)++;
-	start = *s;
-	index = 0;
-	while ((*s)[index] && (*s)[index] != c)
-		index++;
-	word = (char *)malloc((index + 1) * sizeof(char));
-	if (!word)
-		return (NULL);
 	i = 0;
-	while (i < index)
-	{
-		word[i] = start[i];
-		i++;
-	}
-	word[i] = '\0';
-	*s += index;
-	return (word);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**tmp;
-	int		word_count;
-	int		i;
-
 	if (!s)
-		return (NULL);
-	word_count = count_words(s, c);
-	tmp = (char **)malloc((word_count + 1) * sizeof(char *));
-	if (!tmp)
-		return (NULL);
+		return (0);
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strchr(char *s, int c)
+{
+	int	i;
+
 	i = 0;
-	while (i < word_count)
+	while (s[i] != '\0')
 	{
-		tmp[i] = get_next_word(&s, c);
-		if (!tmp[i])
-		{
-			while (i > 0)
-				free(tmp[--i]);
-			free(tmp);
-			return (NULL);
-		}
+		if (s[i] == (char)c)
+			return (&((char *)s)[i]);
 		i++;
 	}
-	tmp[i] = NULL;
-	return (tmp);
+	if ((char)c == '\0')
+		return (&((char *)s)[i]);
+	return (0);
+}
+
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*res;
+
+	i = 0;
+	if (!s)
+		return (0);
+	if (start > ft_strlen(s))
+	{
+		res = malloc(sizeof(char) * (1));
+		if (!res)
+			return (NULL);
+		res[0] = '\0';
+		return (res);
+	}
+	if (ft_strlen(s) - start < len)
+		len = ft_strlen(s) - start;
+	res = malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	while (start < ft_strlen(s) && i < len && s[start])
+		res[i++] = s[start++];
+	res[i] = '\0';
+	return (res);
 }
